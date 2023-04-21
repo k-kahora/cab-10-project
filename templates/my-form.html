@@ -1,0 +1,55 @@
+<!-- /templates/my-form.html-->
+
+<html>
+    <head>
+        <title>Flask Example Input Form</title>
+    </head>
+    <body>
+	    <h3>Flask|Python|Psycopg2|PostgreSQL</h3>
+
+	    <h4>Example 2 - result table without column headings</h4>
+        <form action="/query-handler" method="POST">
+            <div>
+		        Enter any PostgreSQL command, terminated with a semicolon
+                <br />
+	            Example query: SELECT * FROM countries;
+		        <input type="text" name="query">
+            </div>
+                <input type="submit" value="Submit">
+        </form>
+
+        <h4>Find the traffic data in your county!</h4>
+        <form method="post" action="/county-handler">
+            <label for="county">Select a County:</label>
+            <select name="county" id="county">
+                <option value="All">All Counties</option>
+              {% for value in county_option %}
+                <option value="{{ value[0] }}">{{ value[0] }}</option>
+              {% endfor %}
+            </select>
+          
+            <label for="year">Select a Year:</label>
+            <select name="year" id="year">
+                <option value="All">All Years</option>
+              {% for value in year_option %}
+                <option value="{{ value[0] }}">{{ value[0] }}</option>
+              {% endfor %}
+            </select>
+          
+            <input type="submit" value="Submit">
+          </form>
+          
+
+    </body>
+
+    <!-- minimal styling -->
+    <style>
+        form {
+            margin: 1%;
+        }
+
+        div {
+            margin: 1% 0;
+        }
+    </style>
+</html>
