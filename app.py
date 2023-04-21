@@ -112,20 +112,17 @@ def query_handler():
 
 @app.route('/county-handler', methods=['POST'])
 def county_handler():
-    county = request.form['county']
-    year = request.form['year']
-    if county == "All" and year != "All":
-        rows = connect('SELECT county_name, traffic_count, year, number_of_evs FROM (County NATURAL JOIN Traffic) WHERE year =' + request.form['year'] + ';')
-    elif county != "All" and year == "All": 
-        rows = connect('SELECT county_name, traffic_count, year, number_of_evs FROM (County NATURAL JOIN Traffic) WHERE county_name = ' 
-                   + request.form['county'] + ';')
-    elif county == "All" and year == "All":
-        rows = connect('SELECT county_name, traffic_count, year, number_of_evs FROM (County NATURAL JOIN Traffic);')
-    else:
-        rows = connect('SELECT county_name, traffic_count, year, number_of_evs FROM (County NATURAL JOIN Traffic) WHERE county_name = ' 
-                   + request.form['county'] + ' AND year =' + request.form['year'] + ';')
+    rows = connect('SELECT county_name, traffic_count, year, number_of_evs FROM (County NATURAL JOIN Traffic) WHERE county_name=' + 
+                   request.form['county'] + ' AND year=' + request.form['year'] + ";")
     heads = ['County Name', 'Traffic Count', 'Year', 'Latest Number of EVs in County']
     return render_template('my-result.html', rows=rows, heads=heads)
+
+@app.route('/charger-handler', methods=['POST'])
+def charger_handler():
+    rows = connect('SELECT county_name, charger_name, number_of_evs FROM (County NATURAL JOIN Charger) WHERE county_name=' +
+                   request.form['county']+';')
+    heads = ['County Name', 'Charger Name','Latest Number of EVs in County']
+    return render_template('my-result.html', rows=rows, heads=heads) if rows is not None else []
 
 if __name__ == '__main__':
     app.run(debug = True)
