@@ -22,6 +22,7 @@
         <form method="post" action="/county-handler">
             <label for="county">Select a County:</label>
             <select name="county" id="county">
+              <option value="All">All Counties</option>
               {% for value in county_option %}
                 <option value="{{ value[0] }}">{{ value[0] }}</option>
               {% endfor %}
