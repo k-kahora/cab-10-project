@@ -48,3 +48,9 @@ This example code is derived from:
 https://www.postgresqltutorial.com/postgresql-python/  
 https://scoutapm.com/blog/python-flask-tutorial-getting-started-with-flask  
 https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  
+
+To populate the database run the following script with sudo privelges
+
+```
+sudo ./startup.sh
+```
