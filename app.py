@@ -136,5 +136,17 @@ def charger_handler():
     else:
         return "No results found."
 
+@app.route('/salary-handler', methods=['POST'])
+def salary_handler():
+    salary = request.form['salary']
+    query = f"SELECT county, median_income FROM zipcodes_and_salary ORDER BY ABS(median_income - '{salary}') ASC;"
+
+    rows = connect(query)
+    heads = ['County Name', 'Median Income']
+    if rows:
+        return render_template('my-result.html', rows=rows, heads=heads)
+    else:
+        return "No results found."
+
 if __name__ == '__main__':
     app.run(debug = True)
