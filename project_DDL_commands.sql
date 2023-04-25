@@ -60,11 +60,17 @@ SELECT AVG(median_income) as median_income, county
 FROM zipcodes_and_county
 GROUP BY county;
 
-SELECT county, median_income
+
+CREATE VIEW zipcodes_with_ev AS
+SELECT median_income, county, number_of_evs
 FROM zipcodes_and_salary
-ORDER BY
-ABS(median_income - %s)
-ASC
+NATURAL JOIN county;
+
+-- SELECT county, median_income
+-- FROM zipcodes_and_salary
+-- ORDER BY
+-- ABS(median_income - %s)
+-- ASC
 
 -- Call the seeding commands
 \i project_DML_commands.sql
