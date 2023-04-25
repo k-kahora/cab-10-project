@@ -1,12 +1,6 @@
-# flask7dbs
+# CAB Project 10
 
-## Overview
-
-This is an example Flask | Python | Psycopg2 | PostgreSQL
-application that connects to the 7dbs database from
-Chapter 2 of _Seven Databases in Seven Weeks Second Edition_
-by Luc Perkins with Eric Redmond and Jim R. Wilson.
-The CSC 315 VM is assumed.
+Alex Quezada and Malcolm Kahora
 
 ## One-Time Installation
 
@@ -23,6 +17,12 @@ pip install flask
 
 ## Usage
 
+To populate the database, run the following script with sudo privileges:
+
+```
+sudo ./startup.sh
+```
+
 To run the Flask application, simply execute:
 
 ```
@@ -32,25 +32,8 @@ flask run
 ```
 
 ## Screenshots
-![Home Page](images/home_page.png)  
-![Venue Result Page](images/venue_result.png)  
-![Query Result Page](images/query_result.png)  
+![Home Page](images/home.png)  
+![County Traffic Page](images/county_traffic.png)  
+![Compare Median Income Page](images/median_income.png)
+![Chargers Near You Page](images/chargers.png)
 
-## References
-
-Flask documentation:  
-https://flask.palletsprojects.com/  
-
-Psycopg2 documentation:  
-https://www.psycopg.org/  
-
-This example code is derived from:  
-https://www.postgresqltutorial.com/postgresql-python/  
-https://scoutapm.com/blog/python-flask-tutorial-getting-started-with-flask  
-https://www.geeksforgeeks.org/python-using-for-loop-in-flask/  
-
-To populate the database run the following script with sudo privelges
-
-```
-sudo ./startup.sh
-```

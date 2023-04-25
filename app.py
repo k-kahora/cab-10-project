@@ -139,10 +139,10 @@ def charger_handler():
 @app.route('/salary-handler', methods=['POST'])
 def salary_handler():
     salary = request.form['salary']
-    query = f"SELECT county, median_income FROM zipcodes_and_salary ORDER BY ABS(median_income - '{salary}') ASC;"
+    query = f"SELECT county, median_income, number_of_evs FROM zipcodes_with_ev ORDER BY ABS(median_income - '{salary}') ASC;"
 
     rows = connect(query)
-    heads = ['County Name', 'Median Income']
+    heads = ['County Name', 'Median Income', 'Number of EVs']
     if rows:
         return render_template('my-result.html', rows=rows, heads=heads)
     else:

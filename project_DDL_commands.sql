@@ -63,8 +63,8 @@ GROUP BY county;
 
 CREATE VIEW zipcodes_with_ev AS
 SELECT median_income, county, number_of_evs
-FROM zipcodes_and_salary
-NATURAL JOIN county;
+FROM zipcodes_and_salary AS Z
+JOIN county AS C ON Z.county=C.county_name;
 
 -- SELECT county, median_income
 -- FROM zipcodes_and_salary

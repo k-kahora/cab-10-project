@@ -5,18 +5,7 @@
         <title>Flask Example Input Form</title>
     </head>
     <body>
-	    <h3>Flask|Python|Psycopg2|PostgreSQL</h3>
-
-	    <h4>Example 2 - result table without column headings</h4>
-        <form action="/query-handler" method="POST">
-            <div>
-		        Enter any PostgreSQL command, terminated with a semicolon
-                <br />
-	            Example query: SELECT * FROM countries;
-		        <input type="text" name="query">
-            </div>
-                <input type="submit" value="Submit">
-        </form>
+	    <h3>CAB Project 10</h3>
 
         <h4>Find the traffic data in your county!</h4>
         <form method="post" action="/county-handler">
@@ -46,9 +35,10 @@
             </div>
                 <input type="submit" value="Submit">
         </form>
+        <h4>Compare your salary to the median salary of NJ Counties!</h4>
         <form action="/salary-handler" method="POST">
             <div>
-	      Enter a salary for a county
+	          Enter your salary:
 		        <input type="number" name="salary", id="salary">
             </div>
                 <input type="submit" value="Submit">
