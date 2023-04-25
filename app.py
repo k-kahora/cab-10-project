@@ -149,4 +149,4 @@ def salary_handler():
         return "No results found."
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug = True, host="192.168.1.241", port="5000")
