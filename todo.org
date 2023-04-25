@@ -1,0 +1,12 @@
+Enter the county to find charger
+Make sure that 
+
+* [2/3] <2023-04-24 Mon>
+
+** DONE Clean zipcode data so it is just NJ
+CLOSED: [2023-04-24 Mon 19:15]
+** DONE Join with the zipcode salary data so that all zips have a county
+CLOSED: [2023-04-24 Mon 20:00]
+*** TODO Group by county with median salary of the salarys calculated
+** TODO Make UI for this interaction
+

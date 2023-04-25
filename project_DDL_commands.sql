@@ -54,5 +54,11 @@ SELECT zipcode, median_income, num_of_houses, county
 FROM zipcodes
 NATURAL JOIN zipcodes_nj;
 
+
+CREATE VIEW zipcodes_and_salary AS
+SELECT AVG(median_income) as median_income, county
+FROM zipcodes_and_county
+GROUP BY county;
+
 -- Call the seeding commands
 \i project_DML_commands.sql
