@@ -1,6 +1,6 @@
 CREATE TABLE county (
 county_name varchar(20) PRIMARY KEY,
-number_of_evs varchar(10)
+number_of_evs int
 );
 
 
@@ -26,7 +26,7 @@ FOREIGN KEY(county_name) REFERENCES county(county_name)
 );
 
 CREATE TABLE charger (
-charger_name varchar(50),
+charger_name varchar(100),
 street varchar(50),
 zipcode char(5),
 ports int,
@@ -60,22 +60,25 @@ JOIN county AS C ON Z.county=C.county_name;
 CREATE VIEW EV_Percentage_by_County AS
 SELECT 
   c.county_name, 
-  SUM(z.[number_of_evs]) AS Total_EVs, 
-  SUM(z.households) AS Total_Households, 
-  AVG(z.[median_income]) AS Avg_Median_Salary, 
-  (CAST(SUM(z.[number_of_evs]) AS FLOAT) / CAST(SUM(z.households) AS FLOAT)) AS EV_Percentage
+  SUM(c.number_of_evs) AS Total_EVs, 
+  SUM(z.num_of_houses) AS Total_Households, 
+  AVG(z.median_income) AS Avg_Median_Salary, 
+  (CAST(SUM(c.number_of_evs) AS FLOAT) / CAST(SUM(z.num_of_houses) AS FLOAT)) AS EV_Percentage
 FROM 
   county c
   JOIN zipcodes_nj cz ON c.county_name = cz.county
   JOIN zipcodes z ON cz.zipcode = z.zipcode
+WHERE 
+  z.num_of_houses <> 0
 GROUP BY 
   c.county_name;
 
--- SELECT county, median_income
--- FROM zipcodes_and_salary
--- ORDER BY
--- ABS(median_income - %s)
--- ASC
+
+SELECT county, median_income
+FROM zipcodes_and_salary
+ORDER BY
+ABS(median_income - %s)
+ASC
 
 -- Call the seeding commands
 \i project_DML_commands.sql
