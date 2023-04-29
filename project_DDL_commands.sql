@@ -59,10 +59,10 @@ JOIN county AS C ON Z.county=C.county_name;
 CREATE VIEW EV_Percentage_by_County AS
 SELECT 
   c.county_name, 
-  SUM(c.number_of_evs) AS Total_EVs, 
+  c.number_of_evs AS Total_EVs, 
   SUM(z.num_of_houses) AS Total_Households, 
   AVG(z.median_income) AS Avg_Median_Salary, 
-  (CAST(SUM(c.number_of_evs) AS FLOAT) / CAST(SUM(z.num_of_houses) AS FLOAT)) AS EV_Percentage
+  (CAST(c.number_of_evs AS FLOAT) / CAST(SUM(z.num_of_houses) AS FLOAT)) AS EV_Percentage
 FROM 
   county c
   JOIN zipcodes_nj cz ON c.county_name = cz.county
