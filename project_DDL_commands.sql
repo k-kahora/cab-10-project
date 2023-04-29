@@ -25,29 +25,20 @@ PRIMARY KEY(county_name, year),
 FOREIGN KEY(county_name) REFERENCES county(county_name)
 );
 
-CREATE TABLE charger_type (
-charger_name varchar(50) PRIMARY KEY,
-level_one BOOLEAN,
-level_two BOOLEAN,
-dc_fast_charging BOOLEAN
-);
-
 CREATE TABLE charger (
 charger_name varchar(50),
 street varchar(50),
-county varchar(20),
 zipcode char(5),
 ports int,
-price float,
-PRIMARY KEY(charger_name, street),
-FOREIGN KEY(county) REFERENCES county(county_name),
-FOREIGN KEY(charger_name) REFERENCES charger_type(charger_name));
+PRIMARY KEY(charger_name, street)
+);
 
 \copy county FROM 'EV_Ownership_Data.csv' DELIMITER ',' CSV HEADER;
 \copy traffic FROM 'Traffic.csv' DELIMITER ',' CSV HEADER;
 -- 250,000 salary are stored as a string and need to be handled in the future
 \copy zipcodes FROM 'nj-median-salary.csv' DELIMITER ',' CSV HEADER;
 \copy zipcodes_nj FROM 'zip_code_database_filtered.csv' DELIMITER ',' CSV HEADER;
+\copy charger FROM 'chargers.csv' DELIMITER ',' CSV HEADER;
 
 CREATE VIEW zipcodes_and_county AS
 SELECT zipcode, median_income, num_of_houses, county
@@ -65,6 +56,20 @@ CREATE VIEW zipcodes_with_ev AS
 SELECT median_income, county, number_of_evs
 FROM zipcodes_and_salary AS Z
 JOIN county AS C ON Z.county=C.county_name;
+
+CREATE VIEW EV_Percentage_by_County AS
+SELECT 
+  c.county_name, 
+  SUM(z.[number_of_evs]) AS Total_EVs, 
+  SUM(z.households) AS Total_Households, 
+  AVG(z.[median_income]) AS Avg_Median_Salary, 
+  (CAST(SUM(z.[number_of_evs]) AS FLOAT) / CAST(SUM(z.households) AS FLOAT)) AS EV_Percentage
+FROM 
+  county c
+  JOIN zipcodes_nj cz ON c.county_name = cz.county
+  JOIN zipcodes z ON cz.zipcode = z.zipcode
+GROUP BY 
+  c.county_name;
 
 -- SELECT county, median_income
 -- FROM zipcodes_and_salary
