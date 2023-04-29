@@ -147,7 +147,7 @@ def salary_handler():
         return render_template('my-result.html', rows=rows, heads=heads)
     else:
         return "No results found."
-    
+
 @app.route('/percent-handler', methods=['POST'])
 def percent_handler():
     query = f"SELECT * FROM EV_Percentage_by_County;"
@@ -156,6 +156,29 @@ def percent_handler():
     heads = ['County', 'Total EVs', 'Total Households', 'Average Median Salary', 'EVs per Household']
     if rows:
         return render_template('my-result.html', rows=rows, heads=heads)
+    else:
+        return "No results found."
+
+@app.route('/traffic-to-ev-ratio', methods=['POST'])
+def ev_ratio_handler():
+    county = request.form['county']
+    query = '''
+SELECT h.county_name, h.number_of_evs/t.traffic_count AS evs_per_traffic
+FROM county h, traffic t
+WHERE h.county_name = '{0}'
+'''.format(county)
+
+    county_option = connect('''
+    SELECT county_name
+    FROM County
+    ORDER BY county_name ASC
+    LIMIT 1;
+    ''')
+
+    rows = connect(query)
+    heads = ['County', 'Total EVs to Household Ratio'] 
+    if rows:
+        return render_template('my-result.html', county_option=county_option, rows=rows, heads=heads)
     else:
         return "No results found."
 

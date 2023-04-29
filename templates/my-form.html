@@ -50,6 +50,18 @@
           <button type="submit">Submit</button>
         </form>
 
+        <form action="/traffic-to-ev-ratio" method="POST">
+
+            <select name="county" id="county">
+              <option value="All">All Counties</option>
+              {% for value in county_option %}
+                <option value="{{ value[0] }}">{{ value[0] }}</option>
+              {% endfor %}
+            </select>
+          <button type="submit">Submit</button>
+
+        </form>
+
           
 
     </body>
