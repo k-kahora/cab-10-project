@@ -3,7 +3,6 @@ county_name varchar(20) PRIMARY KEY,
 number_of_evs int
 );
 
-
 CREATE TABLE zipcodes (
 zipcode varchar(5),
 median_income int,
@@ -33,12 +32,12 @@ ports int,
 PRIMARY KEY(charger_name, street)
 );
 
-\copy county FROM 'EV_Ownership_Data.csv' DELIMITER ',' CSV HEADER;
-\copy traffic FROM 'Traffic.csv' DELIMITER ',' CSV HEADER;
+\copy county FROM 'csv/EV_Ownership_Data.csv' DELIMITER ',' CSV HEADER;
+\copy traffic FROM 'csv/Traffic.csv' DELIMITER ',' CSV HEADER;
 -- 250,000 salary are stored as a string and need to be handled in the future
-\copy zipcodes FROM 'nj-median-salary.csv' DELIMITER ',' CSV HEADER;
-\copy zipcodes_nj FROM 'zip_code_database_filtered.csv' DELIMITER ',' CSV HEADER;
-\copy charger FROM 'chargers.csv' DELIMITER ',' CSV HEADER;
+\copy zipcodes FROM 'csv/nj-median-salary.csv' DELIMITER ',' CSV HEADER;
+\copy zipcodes_nj FROM 'csv/zip_code_database_filtered.csv' DELIMITER ',' CSV HEADER;
+\copy charger FROM 'csv/chargers.csv' DELIMITER ',' CSV HEADER;
 
 CREATE VIEW zipcodes_and_county AS
 SELECT zipcode, median_income, num_of_houses, county
@@ -72,13 +71,6 @@ WHERE
   z.num_of_houses <> 0
 GROUP BY 
   c.county_name;
-
-
-SELECT county, median_income
-FROM zipcodes_and_salary
-ORDER BY
-ABS(median_income - %s)
-ASC
 
 -- Call the seeding commands
 \i project_DML_commands.sql
