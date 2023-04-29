@@ -149,12 +149,11 @@ def salary_handler():
         return "No results found."
     
 @app.route('/percent-handler', methods=['POST'])
-def salary_handler():
-    salary = request.form['salary']
+def percent_handler():
     query = f"SELECT * FROM EV_Percentage_by_County;"
 
     rows = connect(query)
-    heads = ['Total EVs', 'Total Households', 'Average Median Salary', 'EV Percentage']
+    heads = ['County', 'Total EVs', 'Total Households', 'Average Median Salary', 'EVs per Household']
     if rows:
         return render_template('my-result.html', rows=rows, heads=heads)
     else:
