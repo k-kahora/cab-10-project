@@ -147,6 +147,17 @@ def salary_handler():
         return render_template('my-result.html', rows=rows, heads=heads)
     else:
         return "No results found."
+    
+@app.route('/percent-handler', methods=['POST'])
+def percent_handler():
+    query = f"SELECT * FROM EV_Percentage_by_County;"
+
+    rows = connect(query)
+    heads = ['County', 'Total EVs', 'Total Households', 'Average Median Salary', 'EVs per Household']
+    if rows:
+        return render_template('my-result.html', rows=rows, heads=heads)
+    else:
+        return "No results found."
 
 if __name__ == '__main__':
     app.run(debug = True, host="localhost", port="5000")
