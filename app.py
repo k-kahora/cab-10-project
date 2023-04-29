@@ -159,6 +159,30 @@ def percent_handler():
     else:
         return "No results found."
 
+    
+@app.route('/charger-by-county', methods=['POST'])
+def charger_county_handler():
+    county = request.form['county']
+    query = '''
+SELECT h.county_name, c.charger_name, c.ports
+FROM county h 
+NATURAL JOIN charger c
+WHERE h.county_name = '{0}'
+'''.format(county)
+
+    county_option = connect('''
+    SELECT county_name
+    FROM County
+    ORDER BY county_name ASC
+    LIMIT 1;
+    ''')
+
+    rows = connect(query)
+    heads = ['County', 'Charger Name', 'Ports'] 
+    if rows:
+        return render_template('my-result.html', county_option=county_option, rows=rows, heads=heads)
+    else:
+        return "No results found."
 @app.route('/traffic-to-ev-ratio', methods=['POST'])
 def ev_ratio_handler():
     county = request.form['county']
