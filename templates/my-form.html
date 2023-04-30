@@ -8,13 +8,15 @@
     </head>
     <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<div class="text-center jumbotron">
+<div class="text-center container shadow p-3 mb-5 bg-white rounded">
   
+	    <h1>Eletric Vehicles in NJ</h1>
 	    <h3>CAB Project 10</h3>
 	    <h6>Alex Q, & Malcolm K</h6>
 </div>
 <div class="container shadow p-3 mb-5 bg-white rounded">
   <div class="row justify-content-center">
+    <h4>Display the traffic count of a county given a year</h4>
     <form method="post" action="/county-handler">
       <div class="row align-items-center g-3"> 
 	<div class="col-auto"> 
@@ -68,9 +70,9 @@
 
   <h4>View EV ownership relative to the number of households in a county!</h4>
   <form action="/percent-handler" method="POST">
-    <button class="btn btn-primary" type="submit">See EV Ownhership</button>
+    <button class="btn btn-primary" type="submit">View EV Ownership</button>
   </form>
-  <h4>See All Chargers in a county</h4>
+  <h4>View All Chargers in a county</h4>
   <form action="/charger-by-county" method="POST">
     <div class="row align-items-center g-3"> 
       <div class="col-auto"> 
