@@ -159,6 +159,35 @@ def percent_handler():
     else:
         return "No results found."
 
+@app.route('/county-ports', methods=['POST'])
+def charger_port_handler():
+    query = '''
+SELECT z.county, MAX(c.ports)
+FROM charger c, zipcodes_and_county z 
+GROUP BY z.county;
+'''
+    #join togeth 
+    all_chargers = '''
+    SELECT *
+    FROM charger;
+
+    '''
+    county_chargers = '''
+    SELECT county, zipcode
+    FROM zipcodes_and_county;
+    '''
+
+    county_chargers_one = '''
+    SELECT c.charger_name, h.county, c.zipcode, c.street, c.ports 
+    FROM charger c
+    NATURAL JOIN zipcodes_and_county h;
+    '''
+    rows = connect(county_chargers_one)
+    heads = ['Charger Name','County', 'Zipcode', 'Street Address', 'Number of Posts'] 
+    if rows:
+        return render_template('my-result.html', rows=rows, heads=heads)
+    else:
+        return "No results found."
     
 @app.route('/charger-by-county', methods=['POST'])
 def charger_county_handler():
@@ -173,34 +202,11 @@ WHERE h.county_name = '{0}'
     county_option = connect('''
     SELECT county_name
     FROM County
-    ORDER BY county_name ASC
-    LIMIT 1;
+    ORDER BY county_name ASC;
     ''')
 
     rows = connect(query)
     heads = ['County', 'Charger Name', 'Ports'] 
-    if rows:
-        return render_template('my-result.html', county_option=county_option, rows=rows, heads=heads)
-    else:
-        return "No results found."
-@app.route('/traffic-to-ev-ratio', methods=['POST'])
-def ev_ratio_handler():
-    county = request.form['county']
-    query = '''
-SELECT h.county_name, h.number_of_evs/t.traffic_count AS evs_per_traffic
-FROM county h, traffic t
-WHERE h.county_name = '{0}'
-'''.format(county)
-
-    county_option = connect('''
-    SELECT county_name
-    FROM County
-    ORDER BY county_name ASC
-    LIMIT 1;
-    ''')
-
-    rows = connect(query)
-    heads = ['County', 'Total EVs to Household Ratio'] 
     if rows:
         return render_template('my-result.html', county_option=county_option, rows=rows, heads=heads)
     else:
