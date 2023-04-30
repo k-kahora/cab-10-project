@@ -6,7 +6,7 @@ number_of_evs int
 CREATE TABLE zipcodes (
 zipcode varchar(5),
 median_income int,
-num_of_houses int,
+households int,
 PRIMARY KEY(zipcode)
 );
 
@@ -40,7 +40,7 @@ PRIMARY KEY(charger_name, street)
 \copy charger FROM 'csv/chargers.csv' DELIMITER ',' CSV HEADER;
 
 CREATE VIEW zipcodes_and_county AS
-SELECT zipcode, median_income, num_of_houses, county
+SELECT zipcode, median_income, households, county
 FROM zipcodes
 NATURAL JOIN zipcodes_nj;
 
@@ -60,15 +60,15 @@ CREATE VIEW EV_Percentage_by_County AS
 SELECT 
   c.county_name, 
   c.number_of_evs AS Total_EVs, 
-  SUM(z.num_of_houses) AS Total_Households, 
+  SUM(z.households) AS Total_Households, 
   AVG(z.median_income) AS Avg_Median_Salary, 
-  (CAST(c.number_of_evs AS FLOAT) / CAST(SUM(z.num_of_houses) AS FLOAT)) AS EV_Percentage
+  (CAST(c.number_of_evs AS FLOAT) / CAST(SUM(z.households) AS FLOAT)) AS EV_Percentage
 FROM 
   county c
   JOIN zipcodes_nj cz ON c.county_name = cz.county
   JOIN zipcodes z ON cz.zipcode = z.zipcode
 WHERE 
-  z.num_of_houses <> 0
+  z.households <> 0
 GROUP BY 
   c.county_name;
 

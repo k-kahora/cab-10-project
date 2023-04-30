@@ -2,6 +2,14 @@
 
 Alex Quezada and Malcolm Kahora
 
+## Document Wiki
+Docs:
+- [Phase I Initial Video](/docs/Phase1Proposal.mp4)
+- [Phase II Proposal](/docs/PhaseIIProposal.pdf)
+- [Phase III The Database Model Explained](/docs/PhaseIII-ERDiagram.pdf)
+- [Phase III Elaboration: Datbase Model](/docs/PhaseIII-Schema.pdf)
+- [Phase IV Elaboration: Database Design](/docs/PhaseIV-DBDesign.pdf)
+
 ## One-Time Installation
 
 You must perform this one-time installation in the CSC 315 VM:
