@@ -41,7 +41,11 @@ flask run
 
 ## Screenshots
 ![Home Page](images/home.png)  
-![County Traffic Page](images/county_traffic.png)  
-![Compare Median Income Page](images/median_income.png)
-![Chargers Near You Page](images/chargers.png)
+![County Traffic Page](images/traffic.png)  
+![Compare Median Income Page](images/median_salary.png)
+![Chargers in County](images/county_chargers.png)
+![All Chargers](images/all_chargers.png)
+![EV:Household Ratio](images/ratio.png)
+
+
 

@@ -97,18 +97,7 @@ def form():
     
     year_option = connect("SELECT DISTINCT year FROM traffic ORDER BY year DESC;")
     
-    # print(county_option)
-    # for county in county_option:
-    #     print(county[0])
-    # print(year_option)
-    
     return render_template('my-form.html', county_option=county_option, year_option=year_option)
-
-# handle query POST and serve result web page
-@app.route('/query-handler', methods=['POST'])
-def query_handler():
-    rows = connect(request.form['query'])
-    return render_template('my-result.html', rows=rows)
 
 @app.route('/county-handler', methods=['POST'])
 def county_handler():
@@ -124,17 +113,6 @@ def county_handler():
     query = f"SELECT county_name, traffic_count, year, number_of_evs FROM (County NATURAL JOIN Traffic) WHERE county_name='{county}' AND year='{year}';"
     rows = connect(query)
     return render_template('my-result.html', rows=rows, heads=heads)
-
-@app.route('/charger-handler', methods=['POST'])
-def charger_handler():
-    county = request.form['county'].lower().capitalize()
-    query = f"SELECT county_name, charger_name, number_of_evs FROM (County AS C JOIN Charger AS Ch ON c.county_name=ch.county) WHERE county_name='{county}';"
-    rows = connect(query)
-    heads = ['County Name', 'Charger Name','Latest Number of EVs in County']
-    if rows:
-        return render_template('my-result.html', rows=rows, heads=heads)
-    else:
-        return "No results found."
 
 @app.route('/salary-handler', methods=['POST'])
 def salary_handler():

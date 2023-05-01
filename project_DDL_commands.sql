@@ -32,13 +32,6 @@ ports int,
 PRIMARY KEY(charger_name, street)
 );
 
-SELECT t.county, h.number_of_evs/t.traffic_count AS evs_per_traffic
-FROM county h
-JOIN traffic t ON h.county_name = t.county_name
-ORDER BY evs_per_traffic DESC
-LIMIT 1;
-
-
 \copy county FROM 'csv/EV_Ownership_Data.csv' DELIMITER ',' CSV HEADER;
 \copy traffic FROM 'csv/Traffic.csv' DELIMITER ',' CSV HEADER;
 -- 250,000 salary are stored as a string and need to be handled in the future
@@ -50,7 +43,6 @@ CREATE VIEW zipcodes_and_county AS
 SELECT zipcode, median_income, households, county
 FROM zipcodes
 NATURAL JOIN zipcodes_nj;
-
 
 CREATE VIEW zipcodes_and_salary AS
 SELECT AVG(median_income) as median_income, county
