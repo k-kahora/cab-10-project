@@ -32,7 +32,7 @@ ports int,
 PRIMARY KEY(charger_name, street)
 );
 
-SELECT t.county, h.number_of_evs/t.traffic_count AS evs_per_traffic
+SELECT t.county_name, h.number_of_evs/t.traffic_count AS evs_per_traffic
 FROM county h
 JOIN traffic t ON h.county_name = t.county_name
 ORDER BY evs_per_traffic DESC

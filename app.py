@@ -128,7 +128,7 @@ def county_handler():
 @app.route('/charger-handler', methods=['POST'])
 def charger_handler():
     county = request.form['county'].lower().capitalize()
-    query = f"SELECT county_name, charger_name, number_of_evs FROM (County AS C JOIN Charger AS Ch ON c.county_name=ch.county) WHERE county_name='{county}';"
+    query = f"SELECT county_name, charger_name, number_of_evs FROM (County AS C JOIN Charger AS ch ON c.county_name=ch.county) WHERE county_name='{county}';"
     rows = connect(query)
     heads = ['County Name', 'Charger Name','Latest Number of EVs in County']
     if rows:
