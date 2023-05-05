@@ -9,6 +9,11 @@ Docs:
 - [Phase III The Database Model Explained](/docs/PhaseIII-ERDiagram.pdf)
 - [Phase III Elaboration: Datbase Model](/docs/PhaseIII-Schema.pdf)
 - [Phase IV Elaboration: Database Design](/docs/PhaseIV-DBDesign.pdf)
+- [Phase V: Final Report](/docs/PhaseV-Final%20Report.pdf)
+- [Phase IV: Final Video](/docs/PhaseIV-Final%207.50.08%20PM.mp4)
+
+## Purpose
+To help the user make informed decisions when purchasing an Electric Vehicle. This application can also help identify locations in New Jersey that may require more EV charging infrastructure to meet the needs of demand and traffic data.
 
 ## One-Time Installation
 
