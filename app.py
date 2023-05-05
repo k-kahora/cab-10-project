@@ -114,17 +114,6 @@ def county_handler():
     rows = connect(query)
     return render_template('my-result.html', rows=rows, heads=heads)
 
-@app.route('/charger-handler', methods=['POST'])
-def charger_handler():
-    county = request.form['county'].lower().capitalize()
-    query = f"SELECT county_name, charger_name, number_of_evs FROM (County AS C JOIN Charger AS ch ON c.county_name=ch.county) WHERE county_name='{county}';"
-    rows = connect(query)
-    heads = ['County Name', 'Charger Name','Latest Number of EVs in County']
-    if rows:
-        return render_template('my-result.html', rows=rows, heads=heads)
-    else:
-        return "No results found."
-
 @app.route('/salary-handler', methods=['POST'])
 def salary_handler():
     salary = request.form['salary']
